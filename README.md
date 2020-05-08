@@ -19,18 +19,26 @@ https://alltechsavvy.com/must-have-vscode-extensions-for-flutter/
 
 VsCode Extensions
 
--12.TODO tree
--11.TODO Highlights
--10.pubspec assist
--9. Material Theme Icons
--8.image preview
--7.Flutter Files
--6.Error lens
--5. Color Hightlight
--4. Bracket Pair Colorizer 2
--3.bloc
--2.Better Comments
--1.Awesome Flutter Snippets
+- [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter)
+- [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code)
+- [Awesome Flutter Snippets](https://marketplace.visualstudio.com/items?itemName=Nash.awesome-flutter-snippets)
+- [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
+- [bloc](https://marketplace.visualstudio.com/items?itemName=FelixAngelov.bloc)
+- [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
+- [Color Hightlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
+- [Error lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
+- [Flutter Files](https://marketplace.visualstudio.com/items?itemName=gornivv.vscode-flutter-files)
+- [image preview](https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview)
+- [Material Theme Icons](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme-icons)
+- [pubspec assist](https://marketplace.visualstudio.com/items?itemName=jeroen-meijer.pubspec-assist)
+- [TODO Highlights](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
+- [TODO tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)
+
+- [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)
+- [Text Marker (Highlighter)](https://marketplace.visualstudio.com/items?itemName=ryu1kn.text-marker)
+- [Paste JSON as Code](https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype)
+- [GitLens — Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
 App Icon Generator 
 https://appicon.co/
