@@ -28,28 +28,3 @@ class _CustomFieldState extends State<CustomField> {
     );
   }
 }
-// class CustomTextField extends StatelessWidget {
-//   final String titles;
-//   CustomTextField({this.titles});
-
-//   // const CustomTextField({Key key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return new TextFormField(
-//       // controller: _passController,
-//       autofocus: false,
-//       validator: (value) {
-//         if (value.isEmpty) {
-//           return 'Please enter some text';
-//         }
-//         return null;
-//       },
-//       decoration: InputDecoration(
-//         hintText: titles,
-//         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-//         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-//       ),
-//     );
-//   }
-// }
