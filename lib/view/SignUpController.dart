@@ -16,6 +16,19 @@ class _SignUpControllerState extends State<SignUpController> {
     super.dispose();
   }
 
+   DateTime selectedDate = DateTime.now();
+
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
@@ -220,6 +233,7 @@ class _SignUpControllerState extends State<SignUpController> {
     );
 
     final dob = TextFormField(
+      onTap: () => _selectDate(context),
       // controller: _passController,
       autofocus: false,
       validator: (value) {

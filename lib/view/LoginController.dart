@@ -1,3 +1,4 @@
+import 'package:demo/Controls/PPConstantTextField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'SignUpController.dart';
@@ -87,103 +88,121 @@ class _LoginControllerState extends State<LoginController>
     final _emailController = TextEditingController();
     final _passController = TextEditingController();
 
-    final email = TextFormField(
-      controller: _emailController,
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      validator: (value) {
-        if (value.isEmpty) {
-          return 'Please enter some text';
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        hintText: 'Email',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
+    final email = CustomField(
+      titles: "Email Id",
+      // autovalidate: false,
+      // validator: (value) {
+      //   if (value < 0) {
+      //     return 'Negative values not supported';
+      //   }
+      // },
+      // onSaved: (value) => {
+      //   print(value)
+      // },
     );
+        // final email = TextFormField(
+        //   controller: _emailController,
+        //   keyboardType: TextInputType.emailAddress,
+        //   autofocus: false,
+        //   validator: (value) {
+        //     if (value.isEmpty) {
+        //       return 'Please enter some text';
+        //     }
+        //     return null;
+        //   },
+        //   decoration: InputDecoration(
+        //     hintText: 'Email',
+        //     contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        //     border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        //   ),
+        // );
+    
+        final password = TextFormField(
+          controller: _passController,
+          autofocus: false,
+          obscureText: true,
+          validator: (value) {
+            if (value.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            hintText: 'Password',
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+          ),
+        );
+    
+        final loginButton = Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0),
+          child: RaisedButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            onPressed: () {
+              final emails = _emailController.text;
+              final passwords = _passController.text;
+              if (emails.length > 0 && passwords.length > 0) {
+              } else {
+                _showMyDialog();
+              }
+            },
+            padding: EdgeInsets.all(12),
+            color: Colors.lightBlueAccent,
+            child: Text('Log In', style: TextStyle(color: Colors.white)),
+          ),
+        );
+    
+        final signUpLabel = FlatButton(
+          child: Text(
+            'Sign Up',
+            style: TextStyle(color: Colors.black54),
+          ),
+          onPressed: () {
+    //        Navigator.of(context).push(
+    //          MaterialPageRoute<void>(
+    //            fullscreenDialog: true,
+    //            builder: (context) => SignUpController(),
+    //          ),
+    //        );
+    
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => SignUpController()));
+          },
+        );
+    
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Login'),
+          ),
+          backgroundColor: Colors.white,
+          body: Center(
+            child: ListView(
+              shrinkWrap: true,
+              padding: EdgeInsets.only(left: 24.0, right: 24.0),
+              children: <Widget>[
+    //            logo,
+                SizedBox(height: 48.0),
+                email,
+                SizedBox(height: 8.0),
+                password,
+                SizedBox(height: 24.0),
+    //            loginButton,
+                signUpLabel
+              ],
+            ),
+          ),
+          bottomNavigationBar: Container(
+            margin: EdgeInsets.only(left: 24.0, right: 24.0),
+            child: loginButton,
+          ),
+        );
+      }
+    }
+    
+    class CounterFormField {
+}
 
-    final password = TextFormField(
-      controller: _passController,
-      autofocus: false,
-      obscureText: true,
-      validator: (value) {
-        if (value.isEmpty) {
-          return 'Please enter some text';
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        hintText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final loginButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        onPressed: () {
-          final emails = _emailController.text;
-          final passwords = _passController.text;
-          if (emails.length > 0 && passwords.length > 0) {
-          } else {
-            _showMyDialog();
-          }
-        },
-        padding: EdgeInsets.all(12),
-        color: Colors.lightBlueAccent,
-        child: Text('Log In', style: TextStyle(color: Colors.white)),
-      ),
-    );
-
-    final signUpLabel = FlatButton(
-      child: Text(
-        'Sign Up',
-        style: TextStyle(color: Colors.black54),
-      ),
-      onPressed: () {
-//        Navigator.of(context).push(
-//          MaterialPageRoute<void>(
-//            fullscreenDialog: true,
-//            builder: (context) => SignUpController(),
-//          ),
-//        );
-
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => SignUpController()));
-      },
-    );
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-//            logo,
-            SizedBox(height: 48.0),
-            email,
-            SizedBox(height: 8.0),
-            password,
-            SizedBox(height: 24.0),
-//            loginButton,
-            signUpLabel
-          ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.only(left: 24.0, right: 24.0),
-        child: loginButton,
-      ),
-    );
-  }
+class PPtextFormField {
 }
