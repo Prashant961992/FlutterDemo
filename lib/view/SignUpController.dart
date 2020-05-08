@@ -1,3 +1,7 @@
+import 'package:demo/AppConstant/MarginsConstant.dart';
+import 'package:demo/AppConstant/Utility.dart';
+import 'package:demo/Controls/CustomDialog.dart';
+import 'package:demo/Controls/PPCustomtextField.dart';
 import 'package:flutter/material.dart';
 
 class SignUpController extends StatefulWidget {
@@ -6,6 +10,18 @@ class SignUpController extends StatefulWidget {
 }
 
 class _SignUpControllerState extends State<SignUpController> {
+  DateTime selectedDate = DateTime.now();
+  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _postcodeController = TextEditingController();
+  final _countryController = TextEditingController();
+  final _mobileController = TextEditingController();
+  final _dobController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -16,9 +32,7 @@ class _SignUpControllerState extends State<SignUpController> {
     super.dispose();
   }
 
-   DateTime selectedDate = DateTime.now();
-
-  Future<Null> _selectDate(BuildContext context) async {
+  Future<Null> selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -30,223 +44,125 @@ class _SignUpControllerState extends State<SignUpController> {
       });
   }
 
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Yes'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-
-    //            showDialog(
-//              context: this.context,
-//              barrierDismissible: false,
-//              child: new CupertinoAlertDialog(
-//                title: new Text("Dialog Title"),
-//                content: new Text("This is my content"),
-//                actions: <Widget>[
-//                  CupertinoDialogAction(
-//                    onPressed: () => Navigator.pop(context, true),
-//                    isDefaultAction: true,
-//                    child: Text("Yes"),
-//                  ),
-//                  CupertinoDialogAction(
-//                    onPressed: () => Navigator.pop(context, true),
-//                    child: Text("No"),
-//                  )
-//                ],
-//              ),
-//            );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final name = TextFormField(
-      // controller: _emailController,
+    final name = PPCustomtextField(
+      controller: _nameController,
       keyboardType: TextInputType.emailAddress,
-      autofocus: false,
+      hinttext: "Name",
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Name',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final username = TextFormField(
-      // controller: _passController,
-      autofocus: false,
+    final username = PPCustomtextField(
+      controller: _usernameController,
+      keyboardType: TextInputType.emailAddress,
+      hinttext: "Username",
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Username',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final email = TextFormField(
-      // controller: _passController,
-      autofocus: false,
+    final email = PPCustomtextField(
+      controller: _emailController,
+      keyboardType: TextInputType.emailAddress,
+      hinttext: "Email Id",
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Email',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final password = TextFormField(
-      // controller: _passController,
-      autofocus: false,
-      obscureText: true,
+    final password = PPCustomtextField(
+      controller: _passwordController,
+      hinttext: "Password",
+      isSecuretext: true,
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final address = TextFormField(
-      // controller: _passController,
-      autofocus: false,
+    final address = PPCustomtextField(
+      controller: _addressController,
+      hinttext: "Address",
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Address',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final city = TextFormField(
-      // controller: _passController,
-      autofocus: false,
+    final city = PPCustomtextField(
+      controller: _cityController,
+      hinttext: "City",
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'City',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final postcode = TextFormField(
-      // controller: _passController,
-      autofocus: false,
+    final postcode = PPCustomtextField(
+      controller: _postcodeController,
+      keyboardType: TextInputType.number,
+      hinttext: "PostCode",
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Postcode',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final country = TextFormField(
-      // controller: _passController,
-      autofocus: false,
+    final country = PPCustomtextField(
+      controller: _countryController,
+      keyboardType: TextInputType.emailAddress,
+      hinttext: "Country",
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Country',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final mobile = TextFormField(
-      // controller: _passController,
-      autofocus: false,
+    final mobile = PPCustomtextField(
+      controller: _mobileController,
+      keyboardType: TextInputType.emailAddress,
+      hinttext: "Mobile",
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Mobile Number',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
-    final dob = TextFormField(
-      onTap: () => _selectDate(context),
-      // controller: _passController,
-      autofocus: false,
+    final dob = PPCustomtextField(
+      controller: _dobController,
+      hinttext: "Date of birth",
+      isShowsuffixIcon: true,
+      onTap: () {},
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter Email Address';
         }
         return null;
       },
-      decoration: InputDecoration(
-        hintText: 'Date Of birth',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
     );
 
     final signUpButton = Padding(
@@ -279,26 +195,35 @@ class _SignUpControllerState extends State<SignUpController> {
           shrinkWrap: false,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
-            SizedBox(height: 25.0),
+            kverticalSpaceTextField,
             name,
-            SizedBox(height: 24.0),
+            kverticalSpaceTextField,
             username,
-            SizedBox(height: 24.0),
+            kverticalSpaceTextField,
             email,
-            SizedBox(height: 24.0),
+            kverticalSpaceTextField,
             password,
-            SizedBox(height: 24.0),
+            kverticalSpaceTextField,
             address,
-            SizedBox(height: 24.0),
+            kverticalSpaceTextField,
             city,
-            SizedBox(height: 24.0),
+            kverticalSpaceTextField,
             postcode,
-            SizedBox(height: 24.0),
+            kverticalSpaceTextField,
             country,
-            SizedBox(height: 24.0),
+            kverticalSpaceTextField,
             mobile,
-            SizedBox(height: 24.0),
-            dob,
+            kverticalSpaceTextField,
+            Stack(
+              children: <Widget>[
+                SizedBox(
+                  child: dob,
+                ),
+                // SizedBox(
+                //   child: signUpButton,
+                // )
+              ],
+            ),
             // SizedBox(height: 24.0),
             signUpButton,
 //            loginButton,
