@@ -19,15 +19,15 @@ https://alltechsavvy.com/must-have-vscode-extensions-for-flutter/
 
 VsCode Extensions
 
-#12.TODO tree
-#11.TODO Highlights
-#10.pubspec assist
-#9. Material Theme Icons
-#8.image preview
-#7.Flutter Files
-#6.Error lens
-#5. Color Hightlight
-#4. Bracket Pair Colorizer 2
-#3.bloc
-#2.Better Comments
-#1.Awesome Flutter Snippets
+-12.TODO tree
+-11.TODO Highlights
+-10.pubspec assist
+-9. Material Theme Icons
+-8.image preview
+-7.Flutter Files
+-6.Error lens
+-5. Color Hightlight
+-4. Bracket Pair Colorizer 2
+-3.bloc
+-2.Better Comments
+-1.Awesome Flutter Snippets
