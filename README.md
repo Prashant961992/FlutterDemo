@@ -31,3 +31,13 @@ VsCode Extensions
 -3.bloc
 -2.Better Comments
 -1.Awesome Flutter Snippets
+
+App Icon Generator 
+https://appicon.co/
+
+Flutter Basic Tutorial:
+https://www.appbrewery.co/courses/851555/lectures/15448377
+
+Important Link :
+
+https://github.com/londonappbrewery/Flutter-Course-Resources/#section-3-i-am-rich---how-to-create-flutter-apps-from-scratch
