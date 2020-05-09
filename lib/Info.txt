@@ -1,0 +1,9 @@
+
+selection_menu
+Multi selection
+
+// Load file from assets
+https://stackoverflow.com/questions/44816042/flutter-read-text-file-from-assets
+
+// Read and write file Application directory 
+https://flutter.dev/docs/cookbook/persistence/reading-writing-files

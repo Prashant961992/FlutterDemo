@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PPCustomtextField extends StatefulWidget {
   final String hinttext;
@@ -35,8 +36,11 @@ class _PPCustomtextFieldState extends State<PPCustomtextField> {
       validator: widget.validator,
       autovalidate: false,
       enabled: true,
+      onChanged: (value) {
+        print('change');
+      },
       // initialValue: widget.initvalue,
-      // textInputAction: TextInputAction.next,
+      // inputFormatters: <TextInputFormatter>[WhitelistingTextInputFormatter.digitsOnly],
       decoration: InputDecoration(
         hintText: widget.hinttext,
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),

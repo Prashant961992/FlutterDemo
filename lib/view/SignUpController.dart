@@ -4,6 +4,9 @@ import 'package:demo/Controls/CustomDialog.dart';
 import 'package:demo/Controls/PPCustomtextField.dart';
 import 'package:flutter/material.dart';
 
+import '../AppConstant/MarginsConstant.dart';
+import '../AppConstant/MarginsConstant.dart';
+
 class SignUpController extends StatefulWidget {
   @override
   _SignUpControllerState createState() => _SignUpControllerState();
@@ -40,7 +43,8 @@ class _SignUpControllerState extends State<SignUpController> {
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate)
       setState(() {
-        selectedDate = picked;
+         selectedDate = picked;
+        _dobController.text = selectedDate.toString();
       });
   }
 
@@ -107,7 +111,8 @@ class _SignUpControllerState extends State<SignUpController> {
 
     final city = PPCustomtextField(
       controller: _cityController,
-      hinttext: "City",
+      isShowsuffixIcon: true,
+      hinttext: "Select City",
       validator: (value) {
         if (value.isEmpty) {
           return 'Please enter Email Address';
@@ -130,8 +135,20 @@ class _SignUpControllerState extends State<SignUpController> {
 
     final country = PPCustomtextField(
       controller: _countryController,
-      keyboardType: TextInputType.emailAddress,
-      hinttext: "Country",
+      isShowsuffixIcon: true,
+      hinttext: "Select Country",
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please enter Email Address';
+        }
+        return null;
+      },
+    );
+
+    final state = PPCustomtextField(
+      controller: _countryController,
+      isShowsuffixIcon: true,
+      hinttext: "Select State",
       validator: (value) {
         if (value.isEmpty) {
           return 'Please enter Email Address';
@@ -206,25 +223,45 @@ class _SignUpControllerState extends State<SignUpController> {
             kverticalSpaceTextField,
             address,
             kverticalSpaceTextField,
-            city,
-            kverticalSpaceTextField,
             postcode,
             kverticalSpaceTextField,
-            country,
+            InkWell(
+              onTap: () {
+               
+              },
+              child: IgnorePointer(
+                child: country,
+              ),
+            ),
+            kverticalSpaceTextField,
+            InkWell(
+              onTap: () {
+                
+              },
+              child: IgnorePointer(
+                child: state,
+              ),
+            ),
+            kverticalSpaceTextField,
+            InkWell(
+              onTap: () {
+                
+              },
+              child: IgnorePointer(
+                child: city,
+              ),
+            ),
             kverticalSpaceTextField,
             mobile,
             kverticalSpaceTextField,
-            Stack(
-              children: <Widget>[
-                SizedBox(
-                  child: dob,
-                ),
-                // SizedBox(
-                //   child: signUpButton,
-                // )
-              ],
+            InkWell(
+              onTap: () {
+                selectDate(context); // Call Function that has showDatePicker()
+              },
+              child: IgnorePointer(
+                child: dob,
+              ),
             ),
-            // SizedBox(height: 24.0),
             signUpButton,
 //            loginButton,
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'view/HomeView.dart';
 import 'view/LoginController.dart';
 
@@ -20,6 +21,13 @@ class MyApp extends StatelessWidget {
 
 class RedirectMainPage extends StatelessWidget {
   Future<String> _getUsers() async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+  // int counter = (prefs.getInt('counter') ?? 0) + 1;
+  // print('Pressed $counter times.');
+  // await prefs.setInt('counter', counter);
+
+//SharedPreferences.setMockInitialValues (Map<String, dynamic> values);
+
     return null;
   }
 
