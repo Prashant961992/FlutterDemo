@@ -1,10 +1,6 @@
 import 'package:demo/AppConstant/MarginsConstant.dart';
-import 'package:demo/AppConstant/Utility.dart';
-import 'package:demo/Controls/CustomDialog.dart';
 import 'package:demo/Controls/PPCustomtextField.dart';
 import 'package:flutter/material.dart';
-
-import '../AppConstant/MarginsConstant.dart';
 import '../AppConstant/MarginsConstant.dart';
 
 class SignUpController extends StatefulWidget {
@@ -43,7 +39,7 @@ class _SignUpControllerState extends State<SignUpController> {
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate)
       setState(() {
-         selectedDate = picked;
+        selectedDate = picked;
         _dobController.text = selectedDate.toString();
       });
   }

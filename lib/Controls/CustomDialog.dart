@@ -1,6 +1,18 @@
 import 'package:demo/AppConstant/MarginsConstant.dart';
 import 'package:flutter/material.dart';
 
+/*
+Usage Hint 
+showDialog(
+                  context: context,
+                  builder: (BuildContext context) => CustomDialog(
+                    title: "Success",
+                    description:
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    buttonText: "Okay",
+                  ),
+                );
+*/
 // Link for Full Screen Dialog : https://medium.com/flutterpub/flutter-alert-dialog-to-custom-dialog-966195157da8
 class CustomDialog extends StatelessWidget {
   final String title, description, buttonText;
