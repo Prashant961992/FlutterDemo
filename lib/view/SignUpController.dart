@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:demo/AppConstant/MarginsConstant.dart';
+import 'package:demo/Controls/MultiSelectionAlert.dart';
+import 'package:demo/Controls/MultiSelectionListData.dart';
 import 'package:demo/Controls/PPCustomtextField.dart';
 import 'package:flutter/material.dart';
 import '../AppConstant/MarginsConstant.dart';
@@ -198,6 +202,14 @@ class _SignUpControllerState extends State<SignUpController> {
       ),
     );
 
+    Future<MultiSelectionListData> loadAsset(BuildContext context) async {
+      final data = await DefaultAssetBundle.of(context)
+          .loadString('lib/Controls/Country.json');
+      final jsonResponse = jsonDecode(data);
+      final ans = MultiSelectionListData.fromJson(jsonResponse);
+      return ans;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),
@@ -222,18 +234,14 @@ class _SignUpControllerState extends State<SignUpController> {
             postcode,
             kverticalSpaceTextField,
             InkWell(
-              onTap: () {
-               
-              },
+              onTap: () {},
               child: IgnorePointer(
                 child: country,
               ),
             ),
             kverticalSpaceTextField,
             InkWell(
-              onTap: () {
-                
-              },
+              onTap: () {},
               child: IgnorePointer(
                 child: state,
               ),
@@ -241,7 +249,16 @@ class _SignUpControllerState extends State<SignUpController> {
             kverticalSpaceTextField,
             InkWell(
               onTap: () {
-                
+                // final listdatass = await loadAsset(context);
+                // print(listdatass);
+
+                showDialog(
+                  // barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) => MultiSelectionAlert(
+                      // listData: listdatass,
+                      ),
+                );
               },
               child: IgnorePointer(
                 child: city,

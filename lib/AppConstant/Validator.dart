@@ -23,7 +23,7 @@ class Validator {
     return null;
   }
 
-  String validatePasswordLength(String value){
+  String validatePasswordLength(String value) {
     if(value.length==0){
       return "Password can't be empty";
     } else if (value.length < 10){

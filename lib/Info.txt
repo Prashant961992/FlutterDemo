@@ -2,6 +2,9 @@
 selection_menu
 Multi selection
 
+// JSon To Dart Class
+https://javiercbk.github.io/json_to_dart/
+
 // Load file from assets
 https://stackoverflow.com/questions/44816042/flutter-read-text-file-from-assets
 
