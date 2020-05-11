@@ -15,13 +15,14 @@ class LoginBloc {
   static LoginBloc instance;
 
   Sink<LoginResponse> get loginUser => subject.sink;
-  
   // BehaviorSubject<int> _subjectCounter;
 
   void callLoginApi() async {
     // subject.add(Response.loading('Getting Chuck Categories.'));
     // isLoading.add(true);
     print("call");
+  https://github.com/boeledi/Streams-Block-Reactive-Programming-in-Flutter
+    // GitHub Link : 
     // https://medium.com/flutter-community/reactive-programming-streams-bloc-6f0d2bd2d248  (Best Example load ui)
     //https://www.woolha.com/tutorials/rxdart-using-subject-publish-behavior-replay
     //https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967
