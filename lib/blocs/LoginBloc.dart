@@ -1,54 +1,50 @@
 import 'dart:async';
-
 import 'package:demo/models/LoginRequest.dart';
 import 'package:demo/models/LoginResponse.dart';
+import 'package:demo/networking/Response.dart';
 import 'package:demo/repository/LoginRepository.dart';
+import 'package:demo/view/HomeView.dart';
+import 'package:rxdart/subjects.dart';
+// import 'package:rxdart/rxdart.dart';
 
 class LoginBloc {
-  // StreamController _loginController;
-  
+  BehaviorSubject<LoginResponse> subject = new BehaviorSubject<LoginResponse>();
+
+  // BehaviorSubject<bool> isLoading = new BehaviorSubject<bool>();
+
   static LoginBloc instance;
 
-  // LoginBloc() {
-  //    callLoginApi();
-  // }
+  Sink<LoginResponse> get loginUser => subject.sink;
   
-// static Future<T> callLoginApi<T extends Object>(String errorMessage) {
-//   var api = new LoginRepository();
-//     var data = LoginRequest();
-//     data.email = "adminen@yopmail.com";
-//     data.password = "Test@123";
-//     data.rememberMe = true;
-//     // data.clientType = 0;
-//     // data.deviceId = "ios";
+  // BehaviorSubject<int> _subjectCounter;
 
-//     try {
-//       var logData = await api.login(data);
-//       print(logData);
-//       return ;
-//     } catch (e) {
-//       print("Error : $e");
-//     }
-// }
-   Future<LoginResponse> callLoginApi() async {
-     print("call");
-     //https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967
+  void callLoginApi() async {
+    // subject.add(Response.loading('Getting Chuck Categories.'));
+    // isLoading.add(true);
+    print("call");
+    // https://medium.com/flutter-community/reactive-programming-streams-bloc-6f0d2bd2d248  (Best Example load ui)
+    //https://www.woolha.com/tutorials/rxdart-using-subject-publish-behavior-replay
+    //https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967
     var api = new LoginRepository();
     var data = LoginRequest();
     data.email = "adminen@yopmail.com";
     data.password = "Test@123";
     data.rememberMe = true;
-    // data.clientType = 0;
-    // data.deviceId = "ios";
-
+    data.clientType = 0;
+    data.deviceId = "ios";
+    
     try {
       var logData = await api.login(data);
-      print(logData);
-      return logData;
+      subject.add(logData);
     } catch (e) {
-      print("Error : $e");
+      subject.addError(e);
     }
-    
     // return logData;
   }
+
+  dispose() {
+    // isLoading.close();
+    subject.close();
+  }
 }
+
