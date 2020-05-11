@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:demo/AppConstant/MarginsConstant.dart';
 import 'package:demo/Controls/MultiSelectionListData.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +15,6 @@ class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      // future: ,
       initialData: widget.listCountryData,
       builder:
           (BuildContext context, AsyncSnapshot<List<CountryList>> snapshot) {

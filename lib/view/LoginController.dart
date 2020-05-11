@@ -1,6 +1,7 @@
 import 'package:demo/AppConstant/MarginsConstant.dart';
 import 'package:demo/AppConstant/Utility.dart';
 import 'package:demo/Controls/PPCustomtextField.dart';
+import 'package:demo/blocs/LoginBloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'SignUpController.dart';
@@ -12,9 +13,11 @@ class LoginController extends StatefulWidget {
 
 class _LoginControllerState extends State<LoginController>
     with SingleTickerProviderStateMixin {
+      LoginBloc loginbloc;
   @override
   void initState() {
     super.initState();
+    loginbloc = new LoginBloc();
   }
 
   @override
@@ -67,19 +70,25 @@ class _LoginControllerState extends State<LoginController>
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          final emails = _emailController.text;
-          final passwords = _passController.text;
-          if (emails.length > 0 && passwords.length > 0) {
-          } else {
-            final FormState form = _formKey.currentState;
-            // print(form.validate());
-            if (form.validate()) {
-              Utility.showAlert(context, "valid", "valid");
-            } else {
-              Utility.showAlert(
-                  context, "Invalid Credentials", "Email and password invalid");
-            }
-          }
+          LoginBloc().callLoginApi();
+
+          // final emails = _emailController.text;
+          // final passwords = _passController.text;
+          // if (emails.length > 0 && passwords.length > 0) {
+          // } else {
+          //   print('Login Click');
+            
+          //   // this.loginbloc.callLoginApi();
+          //   // final FormState form = _formKey.currentState;
+          //   // // print(form.validate());
+          //   // if (form.validate()) {
+          //   //   print('Valid');
+              
+          //   // } else {
+          //   //   Utility.showAlert(
+          //   //       context, "Invalid Credentials", "Email and password invalid");
+          //   // }
+          // }
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,

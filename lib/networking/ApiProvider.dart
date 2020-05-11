@@ -5,12 +5,29 @@ import 'dart:convert';
 import 'dart:async';
 
 class ApiProvider {
-  final String _baseUrl = "https://api.chucknorris.io/";
+  final String _baseUrl = "https://pmsapi.confidosoftsolutions.com/api/v1/";
 
   Future<dynamic> get(String url) async {
     var responseJson;
     try {
       final response = await http.get(_baseUrl + url);
+      responseJson = _response(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+    return responseJson;
+  }
+
+  Future<dynamic> post(String url, Map<String, dynamic> jsonBody) async {
+    var responseJson;
+    try {
+      final http.Response response = await http.post(
+        _baseUrl + url,
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(jsonBody),
+      );
       responseJson = _response(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -25,7 +42,12 @@ class ApiProvider {
         print(responseJson);
         return responseJson;
       case 400:
-        throw BadRequestException(response.body.toString());
+        // var responseJson = json.decode(response.body.toString());
+        // print(responseJson);
+        // return responseJson;
+
+        // throw BadRequestException(response.body.toString());
+        throw BadRequestException("Bad Request Exception 400");
       case 401:
 
       case 403:
