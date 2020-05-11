@@ -202,13 +202,20 @@ class _SignUpControllerState extends State<SignUpController> {
       ),
     );
 
-    Future<MultiSelectionListData> loadAsset(BuildContext context) async {
-      final data = await DefaultAssetBundle.of(context)
-          .loadString('lib/Controls/Country.json');
-      final jsonResponse = jsonDecode(data);
-      final ans = MultiSelectionListData.fromJson(jsonResponse);
-      return ans;
+    Future<List<CountryList>> loadAssets(BuildContext context) async {
+    final data = await DefaultAssetBundle.of(context)
+        .loadString('lib/Controls/Country.json');
+    final jsonResponse = jsonDecode(data);
+    
+    List arrData = jsonResponse["countryList"];
+    List<CountryList> listData = [];
+    for (var i = 0; i < arrData.length; i++) {
+       var data = CountryList.fromJson(arrData[i]);
+       listData.add(data);
     }
+  
+    return listData;
+  }
 
     return Scaffold(
       appBar: AppBar(
@@ -249,14 +256,15 @@ class _SignUpControllerState extends State<SignUpController> {
             kverticalSpaceTextField,
             InkWell(
               onTap: () {
-                // final listdatass = await loadAsset(context);
-                // print(listdatass);
+                var listdata = loadAssets(context);
+                print(listdata);
 
                 showDialog(
                   // barrierDismissible: false,
                   context: context,
                   builder: (BuildContext context) => MultiSelectionAlert(
-                      // listData: listdatass,
+                    // listCountryData: listdata,
+                      // listDatass: listdata,
                       ),
                 );
               },

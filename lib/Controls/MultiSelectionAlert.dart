@@ -1,16 +1,52 @@
+import 'dart:convert';
+
 import 'package:demo/AppConstant/MarginsConstant.dart';
 import 'package:demo/Controls/MultiSelectionListData.dart';
 import 'package:flutter/material.dart';
 
-class MultiSelectionAlert extends StatelessWidget {
-  List<CountryList> listData;
+class MultiSelectionAlert extends StatefulWidget {
+  final List<CountryList> listCountryData;
+  MultiSelectionAlert({Key key,this.listCountryData}) : super(key: key);
 
-  MultiSelectionAlert({
-    this.listData
-  });
+  @override
+  _MultiSelectionAlertState createState() => _MultiSelectionAlertState();
+}
+
+class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
+ 
+  Future<List<CountryList>> loadAsset(BuildContext context) async {
+    final data = await DefaultAssetBundle.of(context)
+        .loadString('lib/Controls/Country.json');
+    final jsonResponse = jsonDecode(data);
+    
+    List arrData = jsonResponse["countryList"];
+    List<CountryList> listData = [];
+    for (var i = 0; i < arrData.length; i++) {
+       var data = CountryList.fromJson(arrData[i]);
+       listData.add(data);
+    }
+  
+    return listData;
+  }
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: loadAsset(context),
+      // initialData: InitialData,
+      builder: (BuildContext context,
+          AsyncSnapshot<List<CountryList>> snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: Text('Loading....'),
+          );
+        } 
+        return loadData(snapshot.requireData);
+      },
+    );
+  }
+
+  Widget loadData(List datas) {
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
@@ -68,7 +104,7 @@ class MultiSelectionAlert extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     physics: ClampingScrollPhysics(),
-                    itemCount: 50,
+                    itemCount: datas.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         color: Colors.transparent,
@@ -77,7 +113,7 @@ class MultiSelectionAlert extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             ListTile(
-                              title: Text("Hello"),
+                              title: Text(datas[index].name),
                               trailing: Checkbox(
                                 value: false,
                                 onChanged: (bool value) {
