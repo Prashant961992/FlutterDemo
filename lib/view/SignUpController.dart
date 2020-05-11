@@ -203,19 +203,22 @@ class _SignUpControllerState extends State<SignUpController> {
     );
 
     Future<List<CountryList>> loadAssets(BuildContext context) async {
-    final data = await DefaultAssetBundle.of(context)
-        .loadString('lib/Controls/Country.json');
-    final jsonResponse = jsonDecode(data);
-    
-    List arrData = jsonResponse["countryList"];
-    List<CountryList> listData = [];
-    for (var i = 0; i < arrData.length; i++) {
-       var data = CountryList.fromJson(arrData[i]);
-       listData.add(data);
+      final data = await DefaultAssetBundle.of(context)
+          .loadString('lib/Controls/Country.json');
+      final jsonResponse = jsonDecode(data);
+
+      List arrData = jsonResponse["countryList"];
+      List<CountryList> listData = [];
+      for (var i = 0; i < arrData.length; i++) {
+        var data = CountryList();
+        data.name = arrData[i]['name'];
+        data.code = arrData[i]['code'];
+        data.isSelected = false;
+       
+        listData.add(data);
+      }
+      return listData;
     }
-  
-    return listData;
-  }
 
     return Scaffold(
       appBar: AppBar(
@@ -256,16 +259,26 @@ class _SignUpControllerState extends State<SignUpController> {
             kverticalSpaceTextField,
             InkWell(
               onTap: () {
-                var listdata = loadAssets(context);
-                print(listdata);
+                // var listdata = loadAssets(context);
+                // print(listdata);
 
                 showDialog(
                   // barrierDismissible: false,
                   context: context,
-                  builder: (BuildContext context) => MultiSelectionAlert(
-                    // listCountryData: listdata,
-                      // listDatass: listdata,
-                      ),
+                  builder: (BuildContext context) => FutureBuilder(
+                    future: loadAssets(context),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<CountryList>> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: Text('Loading....'),
+                        );
+                      }
+                      return MultiSelectionAlert(
+                        listCountryData: snapshot.requireData,
+                      );
+                    },
+                  ),
                 );
               },
               child: IgnorePointer(

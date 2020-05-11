@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-
 class Utility {
   ConnectivityResult connectivityResult;
   Future<bool> checkConnection() async {
@@ -67,36 +66,5 @@ class Utility {
 //                ],
 //              ),
 //            );
-  }
-
-Future<DateTime> getDate(BuildContext context) {
-      // Imagine that this function is
-      // more complex and slow.
-      return showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2018),
-        lastDate: DateTime(2030),
-        builder: (BuildContext context, Widget child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child,
-          );
-        },
-      );
-    }
-
-  Future<DateTime> selectDatePicker(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-
-    return picked;
-    // if (picked != null && picked != selectedDate)
-    //   setState(() {
-    //     selectedDate = picked;
-    //   });
   }
 }
