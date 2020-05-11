@@ -13,20 +13,6 @@ class MultiSelectionAlert extends StatefulWidget {
 }
 
 class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
-  // Future<List<CountryList>> loadAsset(BuildContext context) async {
-  //   final data = await DefaultAssetBundle.of(context)
-  //       .loadString('lib/Controls/Country.json');
-  //   final jsonResponse = jsonDecode(data);
-
-  //   List arrData = jsonResponse["countryList"];
-  //   List<CountryList> listData = [];
-  //   for (var i = 0; i < arrData.length; i++) {
-  //      var data = CountryList.fromJson(arrData[i]);
-  //      listData.add(data);
-  //   }
-
-  //   return listData;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -56,42 +42,8 @@ class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
       content: Container(
         child: Column(
           children: <Widget>[
-            Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colors.teal,
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(width: 5),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Icon(Icons.close, color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 5),
-                      Expanded(
-                        flex: 9,
-                        child: SingleChildScrollView(
-                          child: Text('What is Lorem Ipsum?',
-                              style: TextStyle(color: Colors.white)),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
-            Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colors.teal[200],
-                )),
+            header('What is Lorem Ipsum?'),
+            search(),
             Expanded(
                 flex: 7,
                 child: Container(
@@ -99,10 +51,10 @@ class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
                       .size
                       .height, // Change as per your requirement
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.teal[100],
+                  color: Colors.white,
                   child: ListView.builder(
                     shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
+                    // physics: ClampingScrollPhysics(),
                     itemCount: datas.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
@@ -137,47 +89,96 @@ class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
                     },
                   ),
                 )),
-            Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colors.teal[200],
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(width: 10),
-                      Expanded(
-                        flex: 5,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          color: Color(0x00000000),
-                          child: Text('Cancel',
-                              style: TextStyle(color: Colors.white)),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        flex: 5,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          onPressed: () {},
-                          color: Colors.lightBlueAccent,
-                          child: Text('Submit',
-                              style: TextStyle(color: Colors.white)),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                    ],
-                  ),
-                ))
+            footer()
           ],
         ),
       ),
     );
+  }
+
+  Widget header(title) {
+    return Expanded(
+        flex: 1,
+        child: Container(
+          color: Colors.blueAccent,
+          child: Row(
+            children: <Widget>[
+              SizedBox(width: 5),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Icon(Icons.close, color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(width: 5),
+              Expanded(
+                flex: 9,
+                child: SingleChildScrollView(
+                  child: Text(title, style: TextStyle(color: Colors.white)),
+                ),
+              )
+            ],
+          ),
+        ));
+  }
+
+  Widget search() {
+    return Expanded(
+        flex: 1,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          color: Colors.white,
+          child: Text('Space for Search Bar'),
+        ));
+  }
+
+  Widget footer() {
+    return Expanded(
+        flex: 1,
+        child: Container(
+          color: Colors.white,
+          child: Row(
+            children: <Widget>[
+              SizedBox(width: 10),
+              Expanded(
+                flex: 5,
+                child: FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child:
+                      Text('Cancel', style: TextStyle(color: Colors.blueGrey)),
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                          color: Colors.blueGrey,
+                          width: 1,
+                          style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(50)),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                flex: 5,
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  onPressed: () {},
+                  color: Colors.lightBlueAccent,
+                  child: Text('Submit', style: TextStyle(color: Colors.white)),
+                ),
+              ),
+              SizedBox(width: 10),
+            ],
+          ),
+        ));
   }
 }

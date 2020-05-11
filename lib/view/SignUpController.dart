@@ -206,7 +206,7 @@ class _SignUpControllerState extends State<SignUpController> {
       final data = await DefaultAssetBundle.of(context)
           .loadString('lib/Controls/Country.json');
       final jsonResponse = jsonDecode(data);
-
+ 
       List arrData = jsonResponse["countryList"];
       List<CountryList> listData = [];
       for (var i = 0; i < arrData.length; i++) {
