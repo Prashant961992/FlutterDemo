@@ -214,7 +214,6 @@ class _SignUpControllerState extends State<SignUpController> {
         data.name = arrData[i]['name'];
         data.code = arrData[i]['code'];
         data.isSelected = false;
-       
         listData.add(data);
       }
       return listData;
@@ -263,7 +262,7 @@ class _SignUpControllerState extends State<SignUpController> {
                 // print(listdata);
 
                 showDialog(
-                  // barrierDismissible: false,
+                  // barrierDismissible: false,  
                   context: context,
                   builder: (BuildContext context) => FutureBuilder(
                     future: loadAssets(context),
