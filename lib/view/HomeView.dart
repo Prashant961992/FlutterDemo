@@ -3,6 +3,38 @@ import 'package:demo/blocs/ChuckCategoryBloc.dart';
 import 'package:demo/networking/Response.dart';
 import 'package:demo/models/chuckCategories.dart';
 import 'package:demo/view/chuck_joke_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class HomeView extends StatefulWidget {
+  HomeView({Key key}) : super(key: key);
+
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
+  Widget build(BuildContext context) {
+    _removeLogin() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('login');
+    }
+
+    return Scaffold(
+      body: Center(
+          child: FlatButton(
+        child: Text(
+          'LogOut',
+          style: TextStyle(color: Colors.black54),
+        ),
+        onPressed: () {
+          _removeLogin();
+          Navigator.of(context).pushReplacementNamed('/home');
+        },
+      )),
+    );
+  }
+}
 
 class GetChuckCategories extends StatefulWidget {
   @override

@@ -43,7 +43,7 @@ class RedirectMainPage extends StatelessWidget {
         if(snapshot.data == null) {
           return LoginController();
         }else{
-          return GetChuckCategories();
+          return HomeView();
         }
       },
     );
