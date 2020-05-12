@@ -1,12 +1,14 @@
-import 'dart:async';
-
 import 'package:demo/AppConstant/MarginsConstant.dart';
 import 'package:demo/AppConstant/Utility.dart';
+import 'package:demo/Controls/AppLoadigIndicator.dart';
 import 'package:demo/Controls/PPCustomtextField.dart';
 import 'package:demo/blocs/LoginBloc.dart';
-import 'package:demo/models/LoginResponse.dart';
+import 'package:demo/main.dart';
+import 'package:demo/networking/Response.dart';
+import 'package:demo/view/HomeView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'SignUpController.dart';
 
 class LoginController extends StatefulWidget {
@@ -15,25 +17,57 @@ class LoginController extends StatefulWidget {
 }
 
 class _LoginControllerState extends State<LoginController>
-    with SingleTickerProviderStateMixin {
+    with WidgetsBindingObserver {
   LoginBloc loginbloc;
+  final GlobalKey keylogin = GlobalKey();
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     loginbloc = new LoginBloc();
+    initData();
+  }
+
+  addLoginPreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('login', "123");
+  }
+
+  void initData() {
     loginbloc.subject.listen((value) {
-       print("Start ================================");
-       print(value.data.toJson());
-       print("End   ================================");
-    }).onError( (error) {
-       print(error);
+      final BuildContext context = keylogin.currentContext;
+      switch (value.status) {
+        case Status.LOADING:
+          // final BuildContext context = keylogin.currentContext;
+          Utility.showActivityIndicator(context, _keyLoader);
+          break;
+        case Status.COMPLETED:
+          // final BuildContext context = keylogin.currentContext;
+          Utility.hideActivityIndicator(context);
+
+          addLoginPreference();
+          Navigator.of(context).pushReplacementNamed('/home');
+          print("Start ================================");
+          print(value.data.toJson());
+          print("End   ================================");
+          break;
+        case Status.ERROR:
+          //  final BuildContext context = keylogin.currentContext;
+          Utility.hideActivityIndicator(context);
+          Utility.showAlert(context, 'Error', value.message);
+          print("Start Error ================================");
+          print(value.message);
+          print("End Error  ================================");
+          break;
+      }
     });
-    // messageSubscription = loginbloc.subject.listen();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     loginbloc.dispose();
     super.dispose();
   }
@@ -41,13 +75,13 @@ class _LoginControllerState extends State<LoginController>
   @override
   Widget build(BuildContext context) {
     //  final logo = Hero(
-//    tag: 'hero',
-//    child: CircleAvatar(
-//      backgroundColor: Colors.transparent,
-//      radius: 48.0,
-//      child: Image.asset('assets/logo.png'),
-//    ),
-//  );
+    //    tag: 'hero',
+    //    child: CircleAvatar(
+    //      backgroundColor: Colors.transparent,
+    //      radius: 48.0,
+    //      child: Image.asset('assets/logo.png'),
+    //    ),
+    //  );
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final _emailController = TextEditingController();
     final _passController = TextEditingController();
@@ -131,6 +165,7 @@ class _LoginControllerState extends State<LoginController>
     );
 
     return Scaffold(
+      key: keylogin,
       appBar: AppBar(
         title: Text('Login'),
       ),

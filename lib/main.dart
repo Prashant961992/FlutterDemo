@@ -16,20 +16,23 @@ class MyApp extends StatelessWidget {
       ),
       home: RedirectMainPage(),
       debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+      // Set routes for using the Navigator.
+      '/home': (BuildContext context) => new RedirectMainPage(),
+    },
     );
   }
 }
 
 class RedirectMainPage extends StatelessWidget {
   Future<String> _getUsers() async {
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-  // int counter = (prefs.getInt('counter') ?? 0) + 1;
-  // print('Pressed $counter times.');
-  // await prefs.setInt('counter', counter);
-
-//SharedPreferences.setMockInitialValues (Map<String, dynamic> values);
-
-    return null;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String str = prefs.getString("login");
+    if (str == null) {
+      return null;
+    } else {
+       return str;
+    }    
   }
 
   @override

@@ -2,9 +2,13 @@ import 'package:demo/AppConstant/MarginsConstant.dart';
 import 'package:demo/Controls/MultiSelectionListData.dart';
 import 'package:flutter/material.dart';
 
+typedef Null ItemSelectedCallback(int value);
+
 class MultiSelectionAlert extends StatefulWidget {
   final List<CountryList> listCountryData;
-  MultiSelectionAlert({Key key, this.listCountryData}) : super(key: key);
+  final ItemSelectedCallback onItemSelected;
+
+  MultiSelectionAlert({Key key, this.listCountryData,this.onItemSelected}) : super(key: key);
 
   @override
   _MultiSelectionAlertState createState() => _MultiSelectionAlertState();
@@ -168,7 +172,9 @@ class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // widget.onItemSelected(1);
+                  },
                   color: Colors.lightBlueAccent,
                   child: Text('Submit', style: TextStyle(color: Colors.white)),
                 ),
