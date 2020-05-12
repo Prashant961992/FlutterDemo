@@ -11,11 +11,11 @@ class LoginBloc {
   BehaviorSubject<Response<LoginResponse>> subject = new BehaviorSubject<Response<LoginResponse>>();
 
   //Method 2 : Using StreamController
-  StreamController _loginController;
-  StreamSink<Response<LoginResponse>> get loginSink =>
-      _loginController.sink;
-  Stream<Response<LoginResponse>> get loginStream =>
-      _loginController.stream;
+  // StreamController _loginController;
+  // StreamSink<Response<LoginResponse>> get loginSink =>
+  //     _loginController.sink;
+  // Stream<Response<LoginResponse>> get loginStream =>
+  //     _loginController.stream;
 
   // for allocate data 
   var data = LoginRequest();
@@ -49,9 +49,9 @@ class LoginBloc {
   }
   
   // Dispose Created Object
-  dispose() {
-    _loginController.close();
-    subject.close();
-  }
+  // dispose() {
+  //   _loginController.close();
+  //   subject.close();
+  // }
 }
 

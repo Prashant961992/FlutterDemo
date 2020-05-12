@@ -14,8 +14,7 @@ class LoginController extends StatefulWidget {
   _LoginControllerState createState() => _LoginControllerState();
 }
 
-class _LoginControllerState extends State<LoginController>
-    with WidgetsBindingObserver {
+class _LoginControllerState extends State<LoginController> {
   LoginBloc loginbloc;
   final GlobalKey keylogin = GlobalKey();
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
@@ -23,7 +22,6 @@ class _LoginControllerState extends State<LoginController>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     loginbloc = new LoginBloc();
     initData();
   }
@@ -54,7 +52,8 @@ class _LoginControllerState extends State<LoginController>
         case Status.ERROR:
           //  final BuildContext context = keylogin.currentContext;
           Utility.hideActivityIndicator(context);
-          Utility.showAlert(context, 'Error', value.message);
+          showAlertPopup(context,'Error', value.message);
+          // Utility.showAlert(context, 'Error', value.message);
           print("Start Error ================================");
           print(value.message);
           print("End Error  ================================");
@@ -65,9 +64,8 @@ class _LoginControllerState extends State<LoginController>
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    loginbloc.dispose();
     super.dispose();
+    // loginbloc.dispose();
   }
 
   @override
@@ -118,14 +116,14 @@ class _LoginControllerState extends State<LoginController>
           final emails = _emailController.text;
           final passwords = _passController.text;
           if (emails.length == 0 && passwords.length == 0) {
-            Utility.showAlert(
-                context, "", "Email and password Required");
+            showAlertPopup(
+                context, "Error......", "Email and password Required");
           } else if (Validator().validateEmail(emails) != null) {
-            Utility.showAlert(
-                context, "", Validator().validateEmail(emails));
+            showAlertPopup(
+                context, "Error......", Validator().validateEmail(emails));
           } else if (Validator().validatePasswordLength(passwords) != null) {
-            Utility.showAlert(
-                context, "", Validator().validatePasswordLength(passwords));
+            showAlertPopup(
+                context, "Error......", Validator().validatePasswordLength(passwords));
           } else {
             loginbloc.data.email = emails;
             loginbloc.data.password = passwords;
@@ -144,13 +142,6 @@ class _LoginControllerState extends State<LoginController>
         style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {
-        //        Navigator.of(context).push(
-        //          MaterialPageRoute<void>(
-        //            fullscreenDialog: true,
-        //            builder: (context) => SignUpController(),
-        //          ),
-        //        );
-
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => SignUpController()));
       },

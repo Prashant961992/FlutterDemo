@@ -1,11 +1,12 @@
+import 'package:demo/Controls/AppBarData.dart';
 import 'package:demo/Controls/Loading.dart';
 import 'package:demo/Controls/Error.dart';
+import 'package:demo/view/AppDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/blocs/ChuckCategoryBloc.dart';
 import 'package:demo/networking/Response.dart';
 import 'package:demo/models/chuckCategories.dart';
 import 'package:demo/view/chuck_joke_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
@@ -15,25 +16,22 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    _removeLogin() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.remove('login');
-    }
-
     return Scaffold(
-      body: Center(
-          child: FlatButton(
-        child: Text(
-          'LogOut',
-          style: TextStyle(color: Colors.black54),
-        ),
-        onPressed: () {
-          _removeLogin();
-          Navigator.of(context).pushReplacementNamed('/home');
+      drawer: AppDrawer(),
+      key: _scaffoldKey,
+      appBar: AppBarData(
+        screenTitle: 'Home',
+        onMenuTap: () {
+          _scaffoldKey.currentState.openDrawer();
         },
-      )),
+      ),
+      // body: Center(
+
+      // ),
     );
   }
 }
@@ -147,6 +145,3 @@ class CategoryList extends StatelessWidget {
     );
   }
 }
-
-
-
