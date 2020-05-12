@@ -17,6 +17,8 @@ class LoginBloc {
   Stream<Response<LoginResponse>> get loginStream =>
       _loginController.stream;
 
+  // for allocate data 
+  var data = LoginRequest();
   // For Call Webservice
 
   void callLoginApi() async {
@@ -31,9 +33,9 @@ class LoginBloc {
 
     subject.add(Response.loading('Getting Chuck Categories.'));
     var api = new LoginRepository();
-    var data = LoginRequest();
-    data.email = "adminen@yopmail.com";
-    data.password = "Test@123";
+    
+    // data.email = "adminen@yopmail.com";
+    // data.password = "Test@123";
     data.rememberMe = true;
     data.clientType = 0;
     data.deviceId = "ios";

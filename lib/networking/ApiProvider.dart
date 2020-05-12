@@ -42,10 +42,12 @@ class ApiProvider {
         print(responseJson);
         return responseJson;
       case 400:
-        // var responseJson = json.decode(response.body.toString());
-        // print(responseJson);
+        var responseJson = json.decode(response.body.toString());
+        print(responseJson);
         // return responseJson;
-
+        if (responseJson['eventMessageId'] == 'USER_LOGIN_FAILED') {
+          throw BadRequestException("Invalid Username and Password");
+        } 
         // throw BadRequestException(response.body.toString());
         throw BadRequestException("Bad Request Exception 400");
       case 401:

@@ -1,11 +1,9 @@
 import 'package:demo/AppConstant/MarginsConstant.dart';
 import 'package:demo/AppConstant/Utility.dart';
-import 'package:demo/Controls/AppLoadigIndicator.dart';
+import 'package:demo/AppConstant/Validator.dart';
 import 'package:demo/Controls/PPCustomtextField.dart';
 import 'package:demo/blocs/LoginBloc.dart';
-import 'package:demo/main.dart';
 import 'package:demo/networking/Response.dart';
-import 'package:demo/view/HomeView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -117,28 +115,22 @@ class _LoginControllerState extends State<LoginController>
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          loginbloc.callLoginApi();
-          // loginbloc.callLoginApi().catchError((error) {
-          //   print("Error Main Screen : $error");
-          // });
-          // print("Response : $val");
-          // final emails = _emailController.text;
-          // final passwords = _passController.text;
-          // if (emails.length > 0 && passwords.length > 0) {
-          // } else {
-          //   print('Login Click');
-
-          //   // this.loginbloc.callLoginApi();
-          //   // final FormState form = _formKey.currentState;
-          //   // // print(form.validate());
-          //   // if (form.validate()) {
-          //   //   print('Valid');
-
-          //   // } else {
-          //   //   Utility.showAlert(
-          //   //       context, "Invalid Credentials", "Email and password invalid");
-          //   // }
-          // }
+          final emails = _emailController.text;
+          final passwords = _passController.text;
+          if (emails.length == 0 && passwords.length == 0) {
+            Utility.showAlert(
+                context, "", "Email and password Required");
+          } else if (Validator().validateEmail(emails) != null) {
+            Utility.showAlert(
+                context, "", Validator().validateEmail(emails));
+          } else if (Validator().validatePasswordLength(passwords) != null) {
+            Utility.showAlert(
+                context, "", Validator().validatePasswordLength(passwords));
+          } else {
+            loginbloc.data.email = emails;
+            loginbloc.data.password = passwords;
+            loginbloc.callLoginApi();
+          }
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
