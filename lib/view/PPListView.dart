@@ -16,6 +16,7 @@ class _PPListViewState extends State<PPListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarData(
+        isShowBack: true,
         screenTitle: 'ListView',
         onMenuTap: () {
           // _scaffoldKey.currentState.openDrawer();

@@ -27,14 +27,15 @@ class _AppBarDataState extends State<AppBarData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Center(
-          child: new Text(widget.screenTitle),
+          child: Center(child: new Text(widget.screenTitle, textAlign: TextAlign.center)),
         ),
           leading: widget.isShowBack == true ? IconButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: Icon(Icons.arrow_back_ios)) : null,
+            icon: Icon(Icons.arrow_back_ios)) : Container(),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.menu),

@@ -13,6 +13,7 @@ class _PPGridViewCustomState extends State<PPGridViewCustom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarData(
+        isShowBack: true,
         screenTitle: 'GridView Custom',
         onMenuTap: () {
           // _scaffoldKey.currentState.openDrawer();

@@ -1,6 +1,4 @@
 import 'package:demo/Controls/AppBarData.dart';
-import 'package:demo/Controls/Loading.dart';
-import 'package:demo/Controls/Error.dart';
 import 'package:demo/view/AppDrawer.dart';
 import 'package:demo/view/PPGridView.dart';
 import 'package:demo/view/PPGridViewBuilder.dart';
@@ -12,14 +10,9 @@ import 'package:demo/view/PPListViewBuilder.dart';
 import 'package:demo/view/PPListViewCustom.dart';
 import 'package:demo/view/PPListViewSeparator.dart';
 import 'package:demo/view/SliversPage.dart';
-import 'package:demo/view/layout_type.dart';
 import 'package:flutter/material.dart';
-import 'package:demo/blocs/ChuckCategoryBloc.dart';
-import 'package:demo/networking/Response.dart';
 import 'package:demo/models/chuckCategories.dart';
 import 'package:demo/view/chuck_joke_view.dart';
-import 'package:http/http.dart';
-
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
@@ -29,13 +22,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  LayoutGroup _layoutGroup = LayoutGroup.nonScrollable;
-  LayoutType _layoutSelection1 = LayoutType.rowColumn;
-  LayoutType _layoutSelection2 = LayoutType.pageView;
-  LayoutType get _layoutSelection => _layoutGroup == LayoutGroup.nonScrollable
-      ? _layoutSelection1
-      : _layoutSelection2;
-
+  
   List<String> listData = [
     'GridView',
     'GridView Count',
@@ -128,13 +115,6 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
-  void _onLayoutGroupToggle() {
-    setState(() {
-      _layoutGroup = _layoutGroup == LayoutGroup.nonScrollable
-          ? LayoutGroup.scrollable
-          : LayoutGroup.nonScrollable;
-    });
-  }
 }
 
 // class GetChuckCategories extends StatefulWidget {

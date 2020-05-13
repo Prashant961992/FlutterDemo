@@ -13,6 +13,7 @@ class _PPGridViewState extends State<PPGridView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarData(
+        isShowBack: true,
         screenTitle: 'GridView',
         onMenuTap: () {
           // _scaffoldKey.currentState.openDrawer();

@@ -1,5 +1,5 @@
-import 'package:demo/view/layout_type.dart';
 import 'package:flutter/material.dart';
+
 //implements HasLayoutGroup
 class SliversPage extends StatelessWidget  {
   // SliversPage({Key key, this.layoutGroup, this.onLayoutToggle}) : super(key: key);
@@ -26,7 +26,7 @@ class SliversPage extends StatelessWidget  {
                     Spacer(),
                   ],
                 ),
-            title: Text('Slivers'),
+            title: Text('Slivers AppBar'),
           ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),

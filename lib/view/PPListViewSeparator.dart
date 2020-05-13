@@ -16,6 +16,7 @@ class _PPListViewSeparatorState extends State<PPListViewSeparator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarData(
+        isShowBack: true,
         screenTitle: 'ListView Separated',
         onMenuTap: () {
           // _scaffoldKey.currentState.openDrawer();

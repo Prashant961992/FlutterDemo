@@ -23,17 +23,18 @@ class PPListViewCustom extends StatefulWidget {
 class _PPListViewCustomState extends State<PPListViewCustom> {
   List<String> items = <String>['1', '2', '3', '4', '5'];
 
-  void _reverse() {
-    setState(() {
-      items = items.reversed.toList();
-    });
-  }
+  // void _reverse() {
+  //   setState(() {
+  //     items = items.reversed.toList();
+  //   });
+  // }
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBarData(
-        screenTitle: 'ListView Builder',
+        isShowBack: true,
+        screenTitle: 'ListView Custom',
         onMenuTap: () {
           // _scaffoldKey.currentState.openDrawer();
         },
