@@ -9,6 +9,7 @@ import 'package:demo/view/PPListView.dart';
 import 'package:demo/view/PPListViewBuilder.dart';
 import 'package:demo/view/PPListViewCustom.dart';
 import 'package:demo/view/PPListViewSeparator.dart';
+import 'package:demo/view/PPPageView.dart';
 import 'package:demo/view/SliversPage.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/models/chuckCategories.dart';
@@ -22,7 +23,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  
   List<String> listData = [
     'GridView',
     'GridView Count',
@@ -33,7 +33,8 @@ class _HomeViewState extends State<HomeView> {
     'ListView Builder',
     'ListView Custom',
     'ListView Separated',
-    'Silver List(Custom Scroll View)'
+    'Silver List(Custom Scroll View)',
+    'Pagination View'
   ];
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -107,14 +108,18 @@ class _HomeViewState extends State<HomeView> {
         Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => PPListViewSeparator()));
         break;
-        case 9:
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => SliversPage()));
-         break;
+      case 9:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => SliversPage()));
+        break;
+      case 10:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => PPPageView()));
+        break;
+
       default:
     }
   }
-
 }
 
 // class GetChuckCategories extends StatefulWidget {
