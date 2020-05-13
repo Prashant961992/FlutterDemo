@@ -10,3 +10,7 @@ https://stackoverflow.com/questions/44816042/flutter-read-text-file-from-assets
 
 // Read and write file Application directory 
 https://flutter.dev/docs/cookbook/persistence/reading-writing-files
+
+//Flutter Layouts Walk through: PageView, ListView, GridView, Slivers, CustomScrollView
+//https://www.youtube.com/watch?v=-zJ6CnOVndE
+//https://github.com/bizz84/layout-demo-flutter

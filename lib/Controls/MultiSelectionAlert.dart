@@ -8,13 +8,16 @@ class MultiSelectionAlert extends StatefulWidget {
   final List<CountryList> listCountryData;
   final ItemSelectedCallback onItemSelected;
 
-  MultiSelectionAlert({Key key, this.listCountryData,this.onItemSelected}) : super(key: key);
+  MultiSelectionAlert({Key key, this.listCountryData, this.onItemSelected})
+      : super(key: key);
 
   @override
   _MultiSelectionAlertState createState() => _MultiSelectionAlertState();
 }
 
 class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
+  TextEditingController _searchQuery;
+  bool _isSearching = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
         child: Column(
           children: <Widget>[
             header('What is Lorem Ipsum?'),
-            search(),
+            _buildSearchField(),
             Expanded(
                 flex: 7,
                 child: Container(
@@ -134,10 +137,94 @@ class _MultiSelectionAlertState extends State<MultiSelectionAlert> {
     return Expanded(
         flex: 1,
         child: Container(
+          padding: EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
           color: Colors.white,
-          child: Text('Space for Search Bar'),
+          child: new TextField(
+            controller: _searchQuery,
+            autofocus: true,
+            decoration: const InputDecoration(
+              hintText: 'Search...',
+              border: InputBorder.none,
+              hintStyle: const TextStyle(color: Colors.white30),
+            ),
+            style: const TextStyle(color: Colors.white, fontSize: 16.0),
+            onChanged: updateSearchQuery,
+          ),
         ));
+  }
+
+  Widget _buildSearchField() {
+    return Expanded(
+        flex: 1,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          width: MediaQuery.of(context).size.width,
+          color: Colors.white,
+          child: new TextFormField(
+            controller: _searchQuery,
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              // prefixIcon: Icon(Icons.mail_outline),
+              // suffixIcon: widget.isShowsuffixIcon == true ? Icon(Icons.arrow_drop_down) : null,
+              // border: UnderlineInputBorder(),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+            ),
+            style: const TextStyle(color: Colors.black, fontSize: 16.0),
+            onChanged: updateSearchQuery,
+          ),
+        ));
+  }
+
+  void updateSearchQuery(String newQuery) {
+    // filteredRecored.clear();
+    if (newQuery.length > 0) {
+      // Set<Country> set = Set.from(allRecord);
+      // set.forEach((element) => filterList(element, newQuery));
+    }
+
+    // if (newQuery.isEmpty) {
+    //   filteredRecored.addAll(allRecord);
+    // }
+
+    setState(() {});
+  }
+
+  // filterList(Country country, String searchQuery) {
+  //   // setState(() {
+  //   //   if (country.name.toLowerCase().contains(searchQuery) ||
+  //   //       country.name.contains(searchQuery)) {
+  //   //     filteredRecored.add(country);
+  //   //   }
+  //   // });
+  // }
+
+  void _startSearch() {
+    ModalRoute.of(context)
+        .addLocalHistoryEntry(new LocalHistoryEntry(onRemove: _stopSearching));
+
+    setState(() {
+      _isSearching = true;
+    });
+  }
+
+  void _stopSearching() {
+    _clearSearchQuery();
+
+    setState(() {
+      _isSearching = false;
+      // filteredRecored.addAll(allRecord);
+    });
+  }
+
+  void _clearSearchQuery() {
+    setState(() {
+      _searchQuery.clear();
+      // updateSearchQuery("Search query");
+    });
   }
 
   Widget footer() {
