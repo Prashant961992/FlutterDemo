@@ -3,10 +3,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'view/HomeView.dart';
 import 'view/LoginController.dart';
 
+enum AuthStatus {
+  NOT_DETERMINED,
+  NOT_LOGGED_IN,
+  LOGGED_IN,
+}
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final AuthStatus authStatus;
+  MyApp({this.authStatus: AuthStatus.NOT_DETERMINED});
   // This widget is the root of your application.
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,6 +34,16 @@ class MyApp extends StatelessWidget {
 }
 
 class RedirectMainPage extends StatelessWidget {
+
+  Widget buildWaitingScreen() {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
   Future<String> _getUsers() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String str = prefs.getString("login");
@@ -40,10 +59,14 @@ class RedirectMainPage extends StatelessWidget {
     return FutureBuilder(
       future: _getUsers(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if(snapshot.data == null) {
-          return LoginController();
+        if(snapshot.hasData == true) {
+          if (snapshot.data == null) {
+             return LoginController();
+          } else {
+             return HomeView();
+          }
         }else{
-          return HomeView();
+          return buildWaitingScreen();
         }
       },
     );
