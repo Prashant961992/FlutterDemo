@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:demo/models/LoginRequest.dart';
 import 'package:demo/models/LoginResponse.dart';
 import 'package:demo/networking/Response.dart';

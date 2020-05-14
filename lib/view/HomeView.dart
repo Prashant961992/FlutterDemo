@@ -1,5 +1,6 @@
 import 'package:demo/Controls/AppBarData.dart';
 import 'package:demo/view/AppDrawer.dart';
+import 'package:demo/view/Category.dart';
 import 'package:demo/view/PPGridView.dart';
 import 'package:demo/view/PPGridViewBuilder.dart';
 import 'package:demo/view/PPGridViewCount.dart';
@@ -34,7 +35,8 @@ class _HomeViewState extends State<HomeView> {
     'ListView Custom',
     'ListView Separated',
     'Silver List(Custom Scroll View)',
-    'Pagination View'
+    'Pagination View',
+    'Category Product View'
   ];
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -115,6 +117,10 @@ class _HomeViewState extends State<HomeView> {
       case 10:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => PPPageView()));
+        break;
+      case 11:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => Category()));
         break;
 
       default:

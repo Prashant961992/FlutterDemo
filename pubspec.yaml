@@ -45,6 +45,8 @@ flutter:
   assets:
     - lib/Controls/Country.json
     - Resources/address.json
+    - Images/download.jpeg
+    - Images/pv_590.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
