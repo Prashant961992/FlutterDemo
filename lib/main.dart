@@ -60,15 +60,11 @@ class RedirectMainPage extends StatelessWidget {
     return FutureBuilder(
       future: _getUsers(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if(snapshot.hasData == true) {
-          if (snapshot.data == null) {
+        if (snapshot.data == null) {
              return LoginController();
           } else {
              return HomePage();
           }
-        }else{
-          return buildWaitingScreen();
-        }
       },
     );
   }

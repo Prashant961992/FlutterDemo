@@ -12,10 +12,16 @@ abstract class BaseView<Bloc extends BaseBloc> extends StatefulWidget {
 abstract class BaseViewState<Page extends BaseView> extends State<Page> {
   String screenName();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
-  void createCallBack();
+  void callBack();
 }
 
 mixin BasicPage<Page extends BaseView> on BaseViewState<Page> {
+  @override
+  void initState() { 
+    super.initState();
+    callBack();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +29,7 @@ mixin BasicPage<Page extends BaseView> on BaseViewState<Page> {
         drawer: AppDrawer(),
         appBar: AppBar(
           title: Text(screenName()),
+          automaticallyImplyLeading: false,
         ),
         body: Container(
           child: body(),
@@ -37,7 +44,7 @@ mixin ErrorHandlingMixin<Page extends BaseView> on BaseViewState<Page> {
   @override
   void initState() {
     super.initState();
-    widget.bloc.errorStream
+    widget.bloc.errorSubject
 			// this will preven multiple messages from showing up in a short interval of time
         .transform(new ThrottleStreamTransformer((_) => TimerStream(true, const Duration(seconds: 2))))
         .listen((error) => showErrorSnackbar(error, scaffoldKey.currentState));
