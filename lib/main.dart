@@ -1,3 +1,4 @@
+import 'package:demo/view/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'view/HomeView.dart';
@@ -63,7 +64,7 @@ class RedirectMainPage extends StatelessWidget {
           if (snapshot.data == null) {
              return LoginController();
           } else {
-             return HomeView();
+             return HomePage();
           }
         }else{
           return buildWaitingScreen();
