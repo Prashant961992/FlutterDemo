@@ -1,5 +1,6 @@
 import 'package:demo/BaseClass/BaseView.dart';
 import 'package:demo/Controls/SlideRightRoute.dart';
+import 'package:demo/Localization/AppTranslations.dart';
 import 'package:demo/view/Category.dart';
 import 'package:demo/view/PPGridView.dart';
 import 'package:demo/view/PPGridViewBuilder.dart';
@@ -45,7 +46,7 @@ class _HomeViewState extends BaseViewState<HomeView> with BasePage {
   
   @override
   String screenName() {
-    return "Home";
+    return AppTranslations.of(context).text("key_home");
   }
 
   @override

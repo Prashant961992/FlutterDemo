@@ -25,7 +25,9 @@ dependencies:
   shared_preferences: ^0.5.7+1
   rxdart: ^0.24.0
   custom_progress_dialog: ^1.0.5
-
+  flutter_localizations:
+    sdk: flutter
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -43,10 +45,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/locale/localization_en.json
+    - assets/locale/localization_hi.json
+    - assets/Images/download.jpeg
+    - assets/Images/pv_590.jpg
     - lib/Controls/Country.json
     - Resources/address.json
-    - Images/download.jpeg
-    - Images/pv_590.jpg
+#    - Images/download.jpeg
+#    - Images/pv_590.jpg
 #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
