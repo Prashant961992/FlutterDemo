@@ -1,6 +1,6 @@
+import 'package:demo/BaseClass/BaseView.dart';
 import 'package:demo/blocs/HomeBloc.dart';
 import 'package:demo/networking/Response.dart';
-import 'package:demo/view/BaseView.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends BaseView {
@@ -12,6 +12,11 @@ class HomePage extends BaseView {
 
 class _HomePageState extends BaseViewState<HomePage> with BasicPage {
   HomeBloc blocs = new HomeBloc();
+  
+  @override
+  AppBarLeadingButton isShowBackButton() {
+    return AppBarLeadingButton.Menu;
+  }
   
   @override
   String screenName() {

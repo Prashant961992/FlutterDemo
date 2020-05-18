@@ -1,5 +1,4 @@
-
-import 'package:demo/blocs/BaseBloc.dart';
+import 'package:demo/BaseClass/BaseBloc.dart';
 import 'package:demo/networking/Response.dart';
 import 'package:rxdart/rxdart.dart';
 

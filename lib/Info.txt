@@ -20,3 +20,6 @@ https://flutter.dev/docs/cookbook/persistence/reading-writing-files
 
 // Localization 
 https://github.com/DeveloperLibs/flutter_localization
+
+//Page Navigation Methods
+https://blog.usejournal.com/flutter-advance-routing-and-navigator-df0f86f0974f
