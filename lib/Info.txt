@@ -17,3 +17,6 @@ https://flutter.dev/docs/cookbook/persistence/reading-writing-files
 
 // FireBase Login demo
 // https://github.com/tattwei46/flutter_login_demo
+
+// Localization 
+https://github.com/DeveloperLibs/flutter_localization
