@@ -1,14 +1,14 @@
-import 'package:demo/Controls/AppBarData.dart';
+import 'package:demo/BaseClass/BaseView.dart';
 import 'package:flutter/material.dart';
 
-class Category extends StatefulWidget {
+class Category extends BaseView {
   Category({Key key}) : super(key: key);
 
   @override
   _CategoryState createState() => _CategoryState();
 }
 
-class _CategoryState extends State<Category> {
+class _CategoryState extends BaseViewState<Category> with BasePage {
   List<String> listHeaderData = [
     'Category 1',
     'Category 2',
@@ -17,47 +17,50 @@ class _CategoryState extends State<Category> {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBarData(
-          isShowBack: true,
-          screenTitle: 'Category',
-          onMenuTap: () {
-            // _scaffoldKey.currentState.openDrawer();
-          },
-        ),
-        body: ListView.builder(
-          shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
-            itemCount: listHeaderData.length,
-            itemBuilder: (BuildContext context, int headerindex) {
-              return Column(
-                children: <Widget>[
-                  ProductHeader(
-                    textTitle: listHeaderData[headerindex],
-                    onMoreTap: () {
-                      print(headerindex);
-                    },
-                  ),
-                  Container(
-                    height: 282,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                        padding: const EdgeInsets.all(8),
-                        itemCount: 50,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ProductCard(
-                            onCardTap: () {
-                              print(
-                                  "Header Index: $headerindex Column : $index");
-                            },
-                          );
-                        }),
-                  ),
-                ],
-              );
-            }));
+  String screenName() {
+    return 'Category';
+  }
+
+  @override
+  AppBarLeadingButton isShowBackButton() {
+    return AppBarLeadingButton.Back;
+  }
+
+  @override
+  void callBack() {}
+  @override
+  Widget body() {
+    return ListView.builder(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(8),
+        itemCount: listHeaderData.length,
+        itemBuilder: (BuildContext context, int headerindex) {
+          return Column(
+            children: <Widget>[
+              ProductHeader(
+                textTitle: listHeaderData[headerindex],
+                onMoreTap: () {
+                  print(headerindex);
+                },
+              ),
+              Container(
+                height: 282,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(8),
+                    itemCount: 50,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ProductCard(
+                        onCardTap: () {
+                          print("Header Index: $headerindex Column : $index");
+                        },
+                      );
+                    }),
+              ),
+            ],
+          );
+        });
   }
 }
 
@@ -100,21 +103,21 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                    flex: 1,
                     child: Container(
                       // height: 30,
-                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                  alignment: Alignment.bottomLeft,
-                  child: Text('Sub Title', textAlign: TextAlign.left),
-                )),
+                      padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                      alignment: Alignment.bottomLeft,
+                      child: Text('Sub Title', textAlign: TextAlign.left),
+                    )),
                 Expanded(
-                  flex: 1,
-                  child: Container(
-                    // height: 30,
-                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                  alignment: Alignment.bottomLeft,
-                  child: Text('233', textAlign: TextAlign.left),
-                ))
+                    flex: 1,
+                    child: Container(
+                      // height: 30,
+                      padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                      alignment: Alignment.bottomLeft,
+                      child: Text('233', textAlign: TextAlign.left),
+                    ))
               ],
             ),
           ),

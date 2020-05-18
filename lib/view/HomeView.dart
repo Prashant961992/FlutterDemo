@@ -1,5 +1,5 @@
-import 'package:demo/Controls/AppBarData.dart';
-import 'package:demo/view/AppDrawer.dart';
+import 'package:demo/BaseClass/BaseView.dart';
+import 'package:demo/Controls/SlideRightRoute.dart';
 import 'package:demo/view/Category.dart';
 import 'package:demo/view/PPGridView.dart';
 import 'package:demo/view/PPGridViewBuilder.dart';
@@ -13,17 +13,16 @@ import 'package:demo/view/PPListViewSeparator.dart';
 import 'package:demo/view/PPPageView.dart';
 import 'package:demo/view/SliversPage.dart';
 import 'package:flutter/material.dart';
-import 'package:demo/models/chuckCategories.dart';
-import 'package:demo/view/chuck_joke_view.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends BaseView {
   HomeView({Key key}) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends BaseViewState<HomeView> with BasePage {
+  
   List<String> listData = [
     'GridView',
     'GridView Count',
@@ -38,38 +37,37 @@ class _HomeViewState extends State<HomeView> {
     'Pagination View',
     'Category Product View'
   ];
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  
   @override
-  void initState() {
-    super.initState();
+  AppBarLeadingButton isShowBackButton() {
+    return AppBarLeadingButton.Menu;
+  }
+  
+  @override
+  String screenName() {
+    return "Home";
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: AppDrawer(),
-      key: _scaffoldKey,
-      appBar: AppBarData(
-        screenTitle: 'Home',
-        onMenuTap: () {
-          _scaffoldKey.currentState.openDrawer();
-        },
-      ),
-      body: ListView.builder(
-          itemCount: listData.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              child: ListTile(
-                onTap: () {
-                  didTapAtIndex(index);
-                },
-                title: Text(listData[index]),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
-            );
-          }),
-    );
+  void callBack() {
+     print("Create Call Back");
+  }
+  
+  @override
+  Widget body() {
+    return ListView.builder(
+        itemCount: listData.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            child: ListTile(
+              onTap: () {
+                didTapAtIndex(index);
+              },
+              title: Text(listData[index]),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
+          );
+        });
   }
 
   void didTapAtIndex(int index) {
@@ -79,8 +77,13 @@ class _HomeViewState extends State<HomeView> {
             .push(MaterialPageRoute(builder: (context) => PPGridView()));
         break;
       case 1:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => PPGridViewCount()));
+        Navigator.of(context).push(SlideRightRoute(
+          widget: PPGridViewCount(),
+        )
+            // MaterialPageRoute(
+            //   builder: (context) => PPGridViewCount()
+            // )
+            );
         break;
       case 2:
         Navigator.of(context)
@@ -188,52 +191,52 @@ class _HomeViewState extends State<HomeView> {
 //   }
 // }
 
-class CategoryList extends StatelessWidget {
-  final chuckCategories categoryList;
+// class CategoryList extends StatelessWidget {
+//   final chuckCategories categoryList;
 
-  const CategoryList({Key key, this.categoryList}) : super(key: key);
+//   const CategoryList({Key key, this.categoryList}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      backgroundColor: Color(0xFF202020),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 0.0,
-                vertical: 1.0,
-              ),
-              child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            ShowChuckyJoke(categoryList.categories[index])));
-                  },
-                  child: SizedBox(
-                    height: 65,
-                    child: Container(
-                      color: Color(0xFF333333),
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                        child: Text(
-                          categoryList.categories[index],
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w100,
-                              fontFamily: 'Roboto'),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    ),
-                  )));
-        },
-        itemCount: categoryList.categories.length,
-        shrinkWrap: true,
-        physics: ClampingScrollPhysics(),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return new Scaffold(
+//       backgroundColor: Color(0xFF202020),
+//       body: ListView.builder(
+//         itemBuilder: (context, index) {
+//           return Padding(
+//               padding: EdgeInsets.symmetric(
+//                 horizontal: 0.0,
+//                 vertical: 1.0,
+//               ),
+//               child: InkWell(
+//                   onTap: () {
+//                     Navigator.of(context).push(MaterialPageRoute(
+//                         builder: (context) =>
+//                             ShowChuckyJoke(categoryList.categories[index])));
+//                   },
+//                   child: SizedBox(
+//                     height: 65,
+//                     child: Container(
+//                       color: Color(0xFF333333),
+//                       alignment: Alignment.center,
+//                       child: Padding(
+//                         padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+//                         child: Text(
+//                           categoryList.categories[index],
+//                           style: TextStyle(
+//                               color: Colors.white,
+//                               fontSize: 20,
+//                               fontWeight: FontWeight.w100,
+//                               fontFamily: 'Roboto'),
+//                           textAlign: TextAlign.left,
+//                         ),
+//                       ),
+//                     ),
+//                   )));
+//         },
+//         itemCount: categoryList.categories.length,
+//         shrinkWrap: true,
+//         physics: ClampingScrollPhysics(),
+//       ),
+//     );
+//   }
+// }

@@ -1,4 +1,4 @@
-import 'package:demo/Controls/AppBarData.dart';
+import 'package:demo/BaseClass/BaseView.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -13,35 +13,35 @@ The ListView default constructor behaves like a ListView.custom with a SliverChi
 Now that we’re done with the types of ListViews, let’s take a look at ScrollPhysics.
 
 */
-class PPListViewCustom extends StatefulWidget {
+class PPListViewCustom extends BaseView {
   PPListViewCustom({Key key}) : super(key: key);
 
   @override
   _PPListViewCustomState createState() => _PPListViewCustomState();
 }
 
-class _PPListViewCustomState extends State<PPListViewCustom> {
+class _PPListViewCustomState extends BaseViewState<PPListViewCustom>
+    with BasePage {
   List<String> items = <String>['1', '2', '3', '4', '5'];
 
-  // void _reverse() {
-  //   setState(() {
-  //     items = items.reversed.toList();
-  //   });
-  // }
-  
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-       appBar: AppBarData(
-        isShowBack: true,
-        screenTitle: 'ListView Custom',
-        onMenuTap: () {
-          // _scaffoldKey.currentState.openDrawer();
-        },
-      ),
-      body: SafeArea(
-        child: ListView.custom(
-          childrenDelegate: SliverChildBuilderDelegate(
+  String screenName() {
+    return 'ListView Custom';
+  }
+
+  @override
+  AppBarLeadingButton isShowBackButton() {
+    return AppBarLeadingButton.Back;
+  }
+
+  @override
+  void callBack() {}
+
+  @override
+  Widget body() {
+    return SafeArea(
+      child: ListView.custom(
+        childrenDelegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return KeepAlive(
                 data: items[index],
@@ -53,9 +53,7 @@ class _PPListViewCustomState extends State<PPListViewCustom> {
               final ValueKey valueKey = key;
               final String data = valueKey.value;
               return items.indexOf(data);
-            }
-          ),
-        ),
+            }),
       ),
     );
   }
@@ -70,7 +68,8 @@ class KeepAlive extends StatefulWidget {
   _KeepAliveState createState() => _KeepAliveState();
 }
 
-class _KeepAliveState extends State<KeepAlive> with AutomaticKeepAliveClientMixin{
+class _KeepAliveState extends State<KeepAlive>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 

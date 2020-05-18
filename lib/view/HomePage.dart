@@ -10,7 +10,7 @@ class HomePage extends BaseView {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends BaseViewState<HomePage> with BasicPage {
+class _HomePageState extends BaseViewState<HomePage> with BasePage {
   HomeBloc blocs = new HomeBloc();
   
   @override

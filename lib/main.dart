@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        splashColor: Colors.black,
         primarySwatch: Colors.blue,
       ),
       home: RedirectMainPage(),
@@ -63,7 +64,7 @@ class RedirectMainPage extends StatelessWidget {
         if (snapshot.data == null) {
              return LoginController();
           } else {
-             return HomePage();
+             return HomeView();
           }
       },
     );
