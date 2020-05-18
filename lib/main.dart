@@ -1,4 +1,3 @@
-
 import 'package:demo/Localization/AppTranslations.dart';
 import 'package:demo/Localization/AppTranslationsDelegate.dart';
 import 'package:demo/Localization/Application.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'view/HomeView.dart';
 import 'view/LoginController.dart';
+import 'dart:ui' as ui;
 
 enum AuthStatus {
   NOT_DETERMINED,
@@ -25,13 +25,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   AppTranslationsDelegate _newLocaleDelegate;
-  
+
   @override
   void initState() {
     super.initState();
     _newLocaleDelegate = AppTranslationsDelegate(newLocale: Locale("en", ""));
-   
-    // application.onLocaleChanged = onLocaleChange;
+    application.onLocaleChanged = onLocaleChange;
     // onLocaleChange(Locale('hi'));
   }
 
@@ -41,7 +40,7 @@ class _MyAppState extends State<MyApp> {
   //     AppTranslations.load(locale);
   //   });
   // }
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -50,6 +49,27 @@ class _MyAppState extends State<MyApp> {
         splashColor: Colors.black,
         primarySwatch: Colors.blue,
       ),
+      builder: (BuildContext context, Widget widget) {
+//         ['ar', // Arabic 'fa', // Farsi 'he', // Hebrew 'ps', // Pashto 'ur', // Urdu];
+        var language = AppTranslations.of(context).currentLanguage;
+        // var _sysLng = ui.window.locale.languageCode; // Get System Language
+        // print(_sysLng);
+        if (language == 'ar' ||
+            language == 'fa' ||
+            language == 'he' ||
+            language == 'ps' ||
+            language == 'ur') {
+          return Directionality(
+            textDirection: TextDirection.rtl,
+            child: widget,
+          );
+        } else {
+          return Directionality(
+            textDirection: TextDirection.ltr,
+            child: widget,
+          );
+        }
+      },
       localizationsDelegates: [
         _newLocaleDelegate,
         //provides localised strings
@@ -59,55 +79,26 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: [
         const Locale("en", ""),
-        const Locale("es", ""),
+        const Locale("hi", ""),
       ],
       home: RedirectMainPage(),
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-      // Set routes for using the Navigator.
-      '/home': (BuildContext context) => new RedirectMainPage(),
-    },
+        // Set routes for using the Navigator.
+        '/root' : (BuildContext context) => new MyApp(),
+        '/home': (BuildContext context) => new RedirectMainPage(),
+      },
     );
   }
-}
-// class MyApp extends StatelessWidget {
-//   AppTranslationsDelegate _newLocaleDelegate;
-//   final AuthStatus authStatus;
-//   MyApp({this.authStatus: AuthStatus.NOT_DETERMINED});
-//   // This widget is the root of your application.
-  
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Demo',
-//       theme: ThemeData(
-//         splashColor: Colors.black,
-//         primarySwatch: Colors.blue,
-//       ),
-//       localizationsDelegates: [
-//         _newLocaleDelegate,
-//         //provides localised strings
-//         GlobalMaterialLocalizations.delegate,
-//         //provides RTL support
-//         GlobalWidgetsLocalizations.delegate,
-//       ],
-//       supportedLocales: [
-//         const Locale("en", ""),
-//         const Locale("es", ""),
-//       ],
-//       home: RedirectMainPage(),
-//       debugShowCheckedModeBanner: false,
-//       routes: <String, WidgetBuilder>{
-//       // Set routes for using the Navigator.
-//       '/home': (BuildContext context) => new RedirectMainPage(),
-//     },
-//     );
-//   }
-// }
+  void onLocaleChange(Locale locale) {
+    setState(() {
+      _newLocaleDelegate = AppTranslationsDelegate(newLocale: locale);
+    });
+  }
+}
 
 class RedirectMainPage extends StatelessWidget {
-
   Widget buildWaitingScreen() {
     return Scaffold(
       body: Container(
@@ -123,8 +114,8 @@ class RedirectMainPage extends StatelessWidget {
     if (str == null) {
       return null;
     } else {
-       return str;
-    }    
+      return str;
+    }
   }
 
   @override
@@ -133,10 +124,10 @@ class RedirectMainPage extends StatelessWidget {
       future: _getUsers(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.data == null) {
-             return LoginController();
-          } else {
-             return HomeView();
-          }
+          return LoginController();
+        } else {
+          return HomeView();
+        }
       },
     );
   }
@@ -144,6 +135,5 @@ class RedirectMainPage extends StatelessWidget {
 
 class User {
   final String name;
-  User (this.name);
+  User(this.name);
 }
-
