@@ -1,4 +1,14 @@
 
+//Upgrade Flutter
+https://github.com/flutter/flutter/wiki/Flutter-build-release-channels
+$ flutter channel
+Flutter channels:
+* stable
+  beta
+  dev
+  master
+To switch channels, run flutter channel [<channel-name>], and then run flutter upgrade to ensure you're on the latest.
+
 selection_menu
 Multi selection
 
