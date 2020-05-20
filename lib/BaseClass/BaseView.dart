@@ -1,8 +1,8 @@
+import 'package:demo/AppConstant/AppData.dart';
 import 'package:demo/BaseClass/BaseBloc.dart';
 import 'package:demo/view/AppDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 enum AppBarLeadingButton {
   Menu,
@@ -27,11 +27,6 @@ mixin BasePage<Page extends BaseView> on BaseViewState<Page> {
   void initState() {
     super.initState();
     callBack();
-  }
-  
-  _removeLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('login');
   }
   
   @override
@@ -66,8 +61,8 @@ mixin BasePage<Page extends BaseView> on BaseViewState<Page> {
           actions: <Widget>[
           IconButton(
             onPressed: () {
-              _removeLogin();
-              Navigator.of(context).pushReplacementNamed('/home');
+              AppData.sharedInstance.removeLogin();
+              Navigator.of(context).pushReplacementNamed('/login');
             },
             icon: Icon(Icons.power_settings_new))
         ],

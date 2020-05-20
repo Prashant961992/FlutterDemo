@@ -4,20 +4,28 @@ import 'package:demo/Localization/Application.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'AppConstant/AppData.dart';
 import 'view/HomeView.dart';
 import 'view/LoginController.dart';
-import 'dart:ui' as ui;
 
-enum AuthStatus {
-  NOT_DETERMINED,
-  NOT_LOGGED_IN,
-  LOGGED_IN,
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  AppData.sharedInstance.isLogin().whenComplete(() {
+    Widget _defaultHome = new LoginController();
+    if (AppData.sharedInstance.loginStatus == AuthStatus.LOGGED_IN) {
+      _defaultHome = new HomeView();
+    }
+
+    runApp(MyApp(
+      defaultWidget: _defaultHome,
+    ));
+  });
 }
-
-void main() => runApp(MyApp());
+// void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
+  final Widget defaultWidget;
+  MyApp({Key key,this.defaultWidget}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -81,12 +89,13 @@ class _MyAppState extends State<MyApp> {
         const Locale("en", ""),
         const Locale("hi", ""),
       ],
-      home: RedirectMainPage(),
+      home: widget.defaultWidget,
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
         // Set routes for using the Navigator.
         '/root' : (BuildContext context) => new MyApp(),
-        '/home': (BuildContext context) => new RedirectMainPage(),
+        '/login': (BuildContext context) => new LoginController(),
+        '/home': (BuildContext context) => new HomeView(),
       },
     );
   }
@@ -98,42 +107,42 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class RedirectMainPage extends StatelessWidget {
-  Widget buildWaitingScreen() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
+// class RedirectMainPage extends StatelessWidget {
+//   Widget buildWaitingScreen() {
+//     return Scaffold(
+//       body: Container(
+//         alignment: Alignment.center,
+//         child: CircularProgressIndicator(),
+//       ),
+//     );
+//   }
 
-  Future<String> _getUsers() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String str = prefs.getString("login");
-    if (str == null) {
-      return null;
-    } else {
-      return str;
-    }
-  }
+//   Future<String> _getUsers() async {
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     String str = prefs.getString("login");
+//     if (str == null) {
+//       return null;
+//     } else {
+//       return str;
+//     }
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _getUsers(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.data == null) {
-          return LoginController();
-        } else {
-          return HomeView();
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder(
+//       future: _getUsers(),
+//       builder: (BuildContext context, AsyncSnapshot snapshot) {
+//         if (snapshot.data == null) {
+//           return LoginController();
+//         } else {
+//           return HomeView();
+//         }
+//       },
+//     );
+//   }
+// }
 
-class User {
-  final String name;
-  User(this.name);
-}
+// class User {
+//   final String name;
+//   User(this.name);
+// }

@@ -1,3 +1,4 @@
+import 'package:demo/AppConstant/AppData.dart';
 import 'package:demo/AppConstant/MarginsConstant.dart';
 import 'package:demo/AppConstant/Utility.dart';
 import 'package:demo/AppConstant/Validator.dart';
@@ -6,7 +7,6 @@ import 'package:demo/blocs/LoginBloc.dart';
 import 'package:demo/networking/Response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'SignUpController.dart';
 
 class LoginController extends StatefulWidget {
@@ -26,11 +26,6 @@ class _LoginControllerState extends State<LoginController> {
     initData();
   }
 
-  addLoginPreference() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('login', "123");
-  }
-
   void initData() {
     loginbloc.subject.listen((value) {
       final BuildContext context = keylogin.currentContext;
@@ -43,7 +38,7 @@ class _LoginControllerState extends State<LoginController> {
           // final BuildContext context = keylogin.currentContext;
           Utility.hideActivityIndicator(context);
 
-          addLoginPreference();
+          AppData.sharedInstance.addLoginPreference();
           Navigator.of(context).pushReplacementNamed('/home');
           print("Start ================================");
           print(value.data.toJson());
