@@ -18,7 +18,7 @@ samples, guidance on mobile development, and a full API reference.
 https://alltechsavvy.com/must-have-vscode-extensions-for-flutter/
 
 VsCode Extensions
-
+- [Complete Flutter Extension Pack](https://marketplace.visualstudio.com/items?itemName=GulajavaMinistudio.complete-flutter-extension-pack)
 - [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter)
 - [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code)
 - [Awesome Flutter Snippets](https://marketplace.visualstudio.com/items?itemName=Nash.awesome-flutter-snippets)
