@@ -1,3 +1,4 @@
+import 'package:demo/Controls/Routes.dart';
 import 'package:demo/Localization/AppTranslations.dart';
 import 'package:demo/Localization/AppTranslationsDelegate.dart';
 import 'package:demo/Localization/Application.dart';
@@ -92,10 +93,9 @@ class _MyAppState extends State<MyApp> {
       home: widget.defaultWidget,
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        // Set routes for using the Navigator.
-        '/root' : (BuildContext context) => new MyApp(),
-        '/login': (BuildContext context) => new LoginController(),
-        '/home': (BuildContext context) => new HomeView(),
+        getScreenName(Routes.MyApp) : (BuildContext context) => new MyApp(),
+        getScreenName(Routes.LoginController): (BuildContext context) => new LoginController(),
+        getScreenName(Routes.HomeView): (BuildContext context) => new HomeView(),
       },
     );
   }
