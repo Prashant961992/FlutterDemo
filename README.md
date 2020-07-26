@@ -54,10 +54,10 @@ https://github.com/londonappbrewery/Flutter-Course-Resources/#section-3-i-am-ric
 For Update Path in Mac:
 For Update Path
 1. Terminal command (vim ~/ .zshrc) / (vim $HOME/.zshrc)
-Press (i) - key for Edit
-Update Path : (export PATH="$PATH:[PATH_TO_FLUTTER_GIT_DIRECTORY]/flutter/bin”) (ex : export PATH=$PATH:/Users/prashantprajapati/Development/flutter/bin)
-After edit click esc key
-Write - (:wq!)
+2. Press (i) - key for Edit
+3. Update Path : (export PATH="$PATH:[PATH_TO_FLUTTER_GIT_DIRECTORY]/flutter/bin”) (ex : export PATH=$PATH:/Users/prashantprajapati/Development/flutter/bin)
+4: After edit click esc key
+5. Write - (:wq!)
 
 Once finish open new terminal window
 
