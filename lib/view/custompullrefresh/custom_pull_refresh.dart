@@ -57,7 +57,7 @@ class _CustomPullToRefreshIndicatorState
                     animation: _spoonController,
                     child: Center(
                       // child: Lottie.network('https://assets6.lottiefiles.com/packages/lf20_M1JAO6.json'),
-                      child: Lottie.asset('lib/30426-ic-cogs.json'),
+                      child: Lottie.asset('lib/view/custompullrefresh/30426-ic-cogs.json'),
                     ),
                     builder: (context, child) {
                       return child;

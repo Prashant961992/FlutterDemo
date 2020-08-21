@@ -42,7 +42,7 @@ class _UserListState extends State<UserList> {
 
   Widget _buildList() {
     return _users.length == 0
-        ? Center(child: Lottie.asset('lib/30426-ic-cogs.json'))
+        ? Center(child: Lottie.asset('lib/view/custompullrefresh/30426-ic-cogs.json'))
         : CustomPullToRefreshIndicator(
             child: ListView.builder(
                 physics: BouncingScrollPhysics(),

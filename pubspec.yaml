@@ -55,6 +55,7 @@ flutter:
     - assets/Images/pv_590.jpg
     - lib/Controls/Country.json
     - Resources/address.json
+    - lib/view/custompullrefresh/30426-ic-cogs.json
   #    - Images/download.jpeg
   #    - Images/pv_590.jpg
   #   - images/a_dot_ham.jpeg
