@@ -2,6 +2,11 @@ import 'package:demo/Controls/Routes.dart';
 import 'package:demo/Localization/AppTranslations.dart';
 import 'package:demo/Localization/AppTranslationsDelegate.dart';
 import 'package:demo/Localization/Application.dart';
+import 'package:demo/view/jsontoform/all_fields.dart';
+import 'package:demo/view/jsontoform/all_fields_v1.dart';
+import 'package:demo/view/jsontoform/login.dart';
+import 'package:demo/view/jsontoform/register.dart';
+import 'package:demo/view/jsontoform/register_with_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -96,6 +101,12 @@ class _MyAppState extends State<MyApp> {
         getScreenName(Routes.MyApp) : (BuildContext context) => new MyApp(),
         getScreenName(Routes.LoginController): (BuildContext context) => new LoginController(),
         getScreenName(Routes.HomeView): (BuildContext context) => new HomeView(),
+        '/allfieldsv1': (context) => AllFieldsV1(),
+        '/allfields': (context) => AllFields(),
+        '/login': (context) => Login(),
+        '/register': (context) => Register(),
+        '/registerMap': (context) => RegisterMap(),
+        // '/userlist': (context) => UserList()
       },
     );
   }
@@ -106,43 +117,3 @@ class _MyAppState extends State<MyApp> {
     });
   }
 }
-
-// class RedirectMainPage extends StatelessWidget {
-//   Widget buildWaitingScreen() {
-//     return Scaffold(
-//       body: Container(
-//         alignment: Alignment.center,
-//         child: CircularProgressIndicator(),
-//       ),
-//     );
-//   }
-
-//   Future<String> _getUsers() async {
-//     SharedPreferences prefs = await SharedPreferences.getInstance();
-//     String str = prefs.getString("login");
-//     if (str == null) {
-//       return null;
-//     } else {
-//       return str;
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FutureBuilder(
-//       future: _getUsers(),
-//       builder: (BuildContext context, AsyncSnapshot snapshot) {
-//         if (snapshot.data == null) {
-//           return LoginController();
-//         } else {
-//           return HomeView();
-//         }
-//       },
-//     );
-//   }
-// }
-
-// class User {
-//   final String name;
-//   User(this.name);
-// }

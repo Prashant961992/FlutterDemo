@@ -13,7 +13,11 @@ import 'package:demo/view/PPListViewCustom.dart';
 import 'package:demo/view/PPListViewSeparator.dart';
 import 'package:demo/view/PPPageView.dart';
 import 'package:demo/view/SliversPage.dart';
+import 'package:demo/view/jsontoform/json_forms.dart';
+import 'package:demo/view/custompullrefresh/list_users.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 class HomeView extends BaseView {
   HomeView({Key key}) : super(key: key);
@@ -23,7 +27,6 @@ class HomeView extends BaseView {
 }
 
 class _HomeViewState extends BaseViewState<HomeView> with BasePage {
-  
   List<String> listData = [
     'GridView',
     'GridView Count',
@@ -36,14 +39,16 @@ class _HomeViewState extends BaseViewState<HomeView> with BasePage {
     'ListView Separated',
     'Silver List(Custom Scroll View)',
     'Pagination View',
-    'Category Product View'
+    'Category Product View',
+    'Json to form',
+    'custom pull to refresh',
   ];
-  
+
   @override
   AppBarLeadingButton isShowBackButton() {
     return AppBarLeadingButton.Menu;
   }
-  
+
   @override
   String screenName() {
     return AppTranslations.of(context).text("key_home");
@@ -51,9 +56,9 @@ class _HomeViewState extends BaseViewState<HomeView> with BasePage {
 
   @override
   void callBack() {
-     print("Create Call Back");
+    print("Create Call Back");
   }
-  
+
   @override
   Widget body() {
     return ListView.builder(
@@ -126,118 +131,15 @@ class _HomeViewState extends BaseViewState<HomeView> with BasePage {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => Category()));
         break;
-
+      case 12:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => JsonForm()));
+        break;
+        case 13:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => UserList()));
+        break;
       default:
     }
   }
 }
-
-// class GetChuckCategories extends StatefulWidget {
-//   @override
-//   _GetChuckyState createState() => _GetChuckyState();
-// }
-
-// class _GetChuckyState extends State<GetChuckCategories> {
-//   ChuckCategoryBloc _bloc;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _bloc = ChuckCategoryBloc();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         elevation: 0.0,
-//         automaticallyImplyLeading: false,
-//         title: Text('Chucky Categories',
-//             style: TextStyle(color: Colors.white, fontSize: 20)),
-//         backgroundColor: Color(0xFF333333),
-//       ),
-//       backgroundColor: Color(0xFF333333),
-//       body: RefreshIndicator(
-//         onRefresh: () => _bloc.fetchCategories(),
-//         child: StreamBuilder<Response<chuckCategories>>(
-//           stream: _bloc.chuckListStream,
-//           builder: (context, snapshot) {
-//             if (snapshot.hasData) {
-//               switch (snapshot.data.status) {
-//                 case Status.LOADING:
-//                   return Loading(loadingMessage: snapshot.data.message);
-//                   break;
-//                 case Status.COMPLETED:
-//                   return CategoryList(categoryList: snapshot.data.data);
-//                   break;
-//                 case Status.ERROR:
-//                   return Error(
-//                     errorMessage: snapshot.data.message,
-//                     onRetryPressed: () => _bloc.fetchCategories(),
-//                   );
-//                   break;
-//               }
-//             }
-//             return Container();
-//           },
-//         ),
-//       ),
-//     );
-//   }
-
-//   @override
-//   void dispose() {
-//     _bloc.dispose();
-//     super.dispose();
-//   }
-// }
-
-// class CategoryList extends StatelessWidget {
-//   final chuckCategories categoryList;
-
-//   const CategoryList({Key key, this.categoryList}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Scaffold(
-//       backgroundColor: Color(0xFF202020),
-//       body: ListView.builder(
-//         itemBuilder: (context, index) {
-//           return Padding(
-//               padding: EdgeInsets.symmetric(
-//                 horizontal: 0.0,
-//                 vertical: 1.0,
-//               ),
-//               child: InkWell(
-//                   onTap: () {
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) =>
-//                             ShowChuckyJoke(categoryList.categories[index])));
-//                   },
-//                   child: SizedBox(
-//                     height: 65,
-//                     child: Container(
-//                       color: Color(0xFF333333),
-//                       alignment: Alignment.center,
-//                       child: Padding(
-//                         padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-//                         child: Text(
-//                           categoryList.categories[index],
-//                           style: TextStyle(
-//                               color: Colors.white,
-//                               fontSize: 20,
-//                               fontWeight: FontWeight.w100,
-//                               fontFamily: 'Roboto'),
-//                           textAlign: TextAlign.left,
-//                         ),
-//                       ),
-//                     ),
-//                   )));
-//         },
-//         itemCount: categoryList.categories.length,
-//         shrinkWrap: true,
-//         physics: ClampingScrollPhysics(),
-//       ),
-//     );
-//   }
-// }
